@@ -1,42 +1,50 @@
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 int main() {
     int age;
-    char withParents;
+    string withParent;
     double money;
-    bool isWithParents;
-    
+    string eligibleRatings, ticketTime;
+
     cout << "Enter your age: ";
     cin >> age;
-    cout << "Are you with your parents? (y/n): ";
-    cin >> withParents;
-    isWithParents = (withParents == 'y' || withParents == 'Y');
+    cout << "Are you with a parent? (yes/no): ";
+    cin >> withParent;
     cout << "Enter the amount of money you have: ";
     cin >> money;
 
     if (age < 13) {
-        if (isWithParents) {
-            cout << "You can watch G or PG movies." << endl;
+        if (withParent == "yes") {
+            eligibleRatings = "G, PG";
         } else {
-            cout << "You can only watch G movies." << endl;
+            eligibleRatings = "G";
         }
-    } else if (age >= 13 && age < 16) {
-        if (isWithParents) {
-            cout << "You can watch G, PG, or R movies." << endl;
+    } else if (age < 16) {
+        if (withParent == "yes") {
+            eligibleRatings = "G, PG, R";
         } else {
-            cout << "You can watch G or PG movies." << endl;
+            eligibleRatings = "G, PG";
         }
     } else {
-        cout << "You can watch G, PG, or R movies." << endl;
+        eligibleRatings = "G, PG, R";
     }
 
     if (money >= 10.50) {
-        cout << "You can afford an evening ticket." << endl;
+        ticketTime = "Evening";
     } else if (money >= 7.50) {
-        cout << "You can afford a matinee ticket." << endl;
+        ticketTime = "Matinee";
     } else {
-        cout << "You don't have enough money for a movie ticket." << endl;
+        ticketTime = "None";
+    }
+
+    cout << "Eligible movie ratings: " << eligibleRatings << endl;
+    if (ticketTime != "None") {
+        cout << "You can afford a " << ticketTime << " ticket." << endl;
+    } else {
+        cout << "You cannot afford a ticket." << endl;
     }
 
     return 0;
