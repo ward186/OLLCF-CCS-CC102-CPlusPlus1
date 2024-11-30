@@ -1,43 +1,45 @@
 #include <iostream>
-#include <algorithm>
+#include <string>
+
 using namespace std;
 
 int main() {
-    string accountType, level;
-    double balance, interestRate = 0;
+    string accountType, accountLevel;
+    double accountBalance, interestRate = 0.0;
 
-    cout << "Enter account type (Personal or Business): ";
+    cout << "Enter account type (Personal/Business): ";
     cin >> accountType;
-    cout << "Enter account level (Standard, Gold, or Platinum): ";
-    cin >> level;
+    cout << "Enter account level (Standard/Gold/Platinum): ";
+    cin >> accountLevel;
     cout << "Enter your account balance: ";
-    cin >> balance;
+    cin >> accountBalance;
 
-    transform(accountType.begin(), accountType.end(), accountType.begin(), ::tolower);
-    transform(level.begin(), level.end(), level.begin(), ::tolower);
-
-    if (accountType == "personal") {
-        if (level == "standard") {
+    if (accountType == "Personal") {
+        if (accountLevel == "Standard") {
             interestRate = 1.2;
-        } else if (level == "gold") {
-            if (balance >= 5000) {
+        } else if (accountLevel == "Gold") {
+            if (accountBalance >= 5000) {
                 interestRate = 2.3;
-            } else if (balance >= 1000) {
+            } else if (accountBalance >= 1000) {
                 interestRate = 1.9;
             }
         }
-    } else if (accountType == "business") {
-        if (level == "standard" && balance >= 1500) {
-            interestRate = 1.7;
-        } else if (level == "platinum" && balance >= 10000) {
-            interestRate = 2.5;
+    } else if (accountType == "Business") {
+        if (accountLevel == "Standard") {
+            if (accountBalance >= 1500) {
+                interestRate = 1.7;
+            }
+        } else if (accountLevel == "Platinum") {
+            if (accountBalance >= 10000) {
+                interestRate = 2.5;
+            }
         }
     }
 
-    if (interestRate > 0) {
-        cout << "The interest rate for your account is: " << interestRate << "%" << endl;
+    if (interestRate > 0.0) {
+        cout << "Your interest rate is " << interestRate << "%." << endl;
     } else {
-        cout << "No applicable interest rate found based on the provided details." << endl;
+        cout << "You are not eligible for interest." << endl;
     }
 
     return 0;
